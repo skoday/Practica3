@@ -60,10 +60,19 @@ class Interfaz:
         lineas_limpias = [linea.strip() for linea in texto.split("\n") if linea.strip()] 
         data = {"Documento": lineas_limpias}
         df = pd.DataFrame(data)
-        print(self.corpus)
+        #print(self.corpus)
         enlace = Bridge(self.corpus, df, [opcion_1, opcion_2, opcion_3])
         respuesta = enlace.procesar_envio()
-        print(respuesta)
+
+        for elemento in respuesta:
+            elemento["Vector representation"] = opcion_1
+            elemento["Extracted features"] = opcion_2
+            elemento["Comparison element"] = opcion_3
+
+        # La siguiente linea es la que andas buscando que debes descomentar
+        enlace.guardar_pdf(df, respuesta)
+        
+        #print(respuesta[0].columns)
 
     def comparar_todo(self):
 
@@ -75,7 +84,10 @@ class Interfaz:
         enlace = Bridge(self.corpus, df, [])
         respuesta = enlace.procesar_todo()
 
-        print(respuesta)
+        #la siguiente linea es la que quieres descomentar que mencione
+        enlace.guardar_pdf(df, respuesta)
+
+        #print(respuesta[0].columns)
 
 
 def iniciar_interfaz():
