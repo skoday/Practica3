@@ -1,0 +1,10 @@
+# Ignorar carpetas
+.ipynb_checkpoints/
+dss/
+
+# Ignorar archivos
+testing.py
+Pruebitas.ipynb
+
+# Ignorar subcarpetas "__pycache__"
+**/__pycache__/
