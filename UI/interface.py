@@ -70,7 +70,7 @@ class Interfaz:
             elemento["Comparison element"] = opcion_3
 
         # La siguiente linea es la que andas buscando que debes descomentar
-        #enlace.guardar_pdf(df, respuesta)
+        enlace.guardar_pdf(df, respuesta)
 
         #print(respuesta[0].columns)
 
@@ -85,7 +85,7 @@ class Interfaz:
         respuesta = enlace.procesar_todo()
 
         #la siguiente linea es la que quieres descomentar que mencione
-        #enlace.guardar_pdf(df, respuesta)
+        enlace.guardar_pdf(df, respuesta)
 
         #print(respuesta[0].columns)
 
