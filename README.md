@@ -10,4 +10,5 @@ y corre el:
 
 ## Si se quiere correr con streamlit
 > pip install streamlit
+y correr
 > streamlit run interfaz.py
