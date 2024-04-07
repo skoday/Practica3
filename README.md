@@ -7,3 +7,7 @@ instalate un:
 y corre el:
 
 > python main.py
+
+## Si se quiere correr con streamlit
+> pip install streamlit
+> streamlit run interfaz.py
