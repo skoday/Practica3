@@ -8,7 +8,7 @@ import numpy as np
 import platform
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Spacer
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Spacer, Paragraph, PageBreak
 
 
 class Bridge:
@@ -53,9 +53,10 @@ class Bridge:
             fila_originales = documentos_originales.iloc[[i]].values.tolist()[0]
             df_similares = documentos_similares_usables[i].copy()
             
-            tabla_originales = Table([["Documento"], fila_originales])
-            tabla_originales.setStyle(style)
-            story.append(tabla_originales)
+            #tabla_originales = Table([["Documento"], fila_originales])
+            #tabla_originales.setStyle(style)
+            #story.append(tabla_originales)
+            story.append(Paragraph(fila_originales[0]))
             story.append(Spacer(1, 12))
 
             df_similares["Documento"] = df_similares.index
@@ -65,6 +66,9 @@ class Bridge:
             tabla_similares.setStyle(style)
             story.append(tabla_similares)
             story.append(Spacer(1, 12))
+
+            if i > 0 and i%2 == 1:
+                story.append(PageBreak())
 
         pdf.build(story)
 
