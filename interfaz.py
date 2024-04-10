@@ -3,15 +3,25 @@ import pandas as pd
 from bridge.lo import Bridge
 
 def cargar_csv():
-    filepath = st.file_uploader("Cargar CSV", type=["csv"])
+    filepath = st.file_uploader("Cargar corpus", type=["csv"], key="csv_uploader")
     if filepath is not None:
         return pd.read_csv(filepath)
+    return None
+
+
+def cargar_txt():
+    txt_file = st.file_uploader("Cargar documentos txt", type=["txt"], key="txt_uploader")
+    if txt_file is not None:
+        text_content = txt_file.getvalue().decode("utf-8")
+        return pd.DataFrame({"Documento": text_content.splitlines()})
     return None
 
 def main():
     st.title("Similaridad entre documetos")
 
-    corpus = cargar_csv()
+    corpus = cargar_csv() 
+
+    df_archivo = cargar_txt()
 
     txt_input = st.text_area("Ingrese el texto aquí", height=200)
 
@@ -24,6 +34,9 @@ def main():
         data = {"Documento": lineas_limpias}
         df = pd.DataFrame(data)
         
+        if len(df) == 0:
+            df = df_archivo
+
         if corpus is not None:
             enlace = Bridge(corpus, df, [opciones_1, int(opciones_2), opciones_3])
             respuesta = enlace.procesar_envio()
@@ -40,6 +53,9 @@ def main():
         lineas_limpias = [linea.strip() for linea in txt_input.split("\n") if linea.strip()] 
         data = {"Documento": lineas_limpias}
         df = pd.DataFrame(data)
+
+        if len(df) == 0:
+            df = df_archivo
 
         if corpus is not None:
             enlace = Bridge(corpus, df, [])

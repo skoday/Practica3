@@ -5,7 +5,7 @@ from pandas.plotting import table
 import subprocess
 import pandas as pd
 import numpy as np
-
+import platform
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Spacer
@@ -67,7 +67,13 @@ class Bridge:
             story.append(Spacer(1, 12))
 
         pdf.build(story)
-        subprocess.run(['xdg-open', pdf_filename])
+
+        os = platform.system()
+
+        if os == 'Linux':
+            subprocess.run(['xdg-open', pdf_filename])
+        else:
+            subprocess.run(['start', pdf_filename], shell=True )
 
     def procesar_envio(self):
         #Normalizando documentos
